@@ -24,6 +24,8 @@ GH_CLIENT_SECRET=asdf123
 REDIRECT_URL=https://google.com
 # Optional: Specify the GitHub host when using GitHub Enterprise
 GH_HOST=github.my-company.com
+# Optional: The GitHub API scope to use use
+GH_SCOPE=repo
 ```
 
 > Create an application on GitHub [here](https://github.com/settings/applications/new) to get your client id and secret if you haven't done that already.
@@ -37,6 +39,8 @@ When authentication was successful, the user will be redirected to the `REDIRECT
 To make this work you have to set the authorization callback URL of [your application on GitHub](https://github.com/settings/developers) to whatever URL `now` gave you plus the path `/callback` e.g. `http://localhost:3000/callback`:
 
 ![Authorization callback URL: 'your-url.now.sh'](https://cloud.githubusercontent.com/assets/168870/24585953/9543e03a-178e-11e7-8f10-07be5c10682c.png)
+
+The scope that you are requesting from the user can be changed by setting `GH_SCOPE` enviroment variable. See the [GitHub docs](https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-scopes-for-oauth-apps/) for details.
 
 To log people in provide a link to url `now` gave you plus the path `login` e.g. `http://localhost:3000/login` when they click on the link it will reditect to `https://github.com/login/oauth/authorize?client_id=asdf123&state`. (where `client_id` is your GitHub app client id in `.env` and `state` is a randomly generated string). This will redirect them to the GitHub sign in page for your app, which looks like this:
 
